@@ -1,8 +1,8 @@
 <#
 .SYNOPSIS
-    Short description
+    Simple check to ensure that a URI is available
 .DESCRIPTION
-    Long description
+    Opinionated call to Invoke-WebRequest to ensure that a URI is responsive.
 .EXAMPLE
     C:\PS>
     Example of how to use this cmdlet
@@ -18,22 +18,15 @@
 .COMPONENT
     systemchecks
 #>
-function Get-Day {
+function Test-Uri {
     [CmdletBinding()]
     param (
-        # [Parameter(Mandatory = $true,
-        #     HelpMessage = 'Helpful Message')]
-        # [ValidateNotNull()]
-        # [ValidateNotNullOrEmpty()]
-        # [string]$YourParameter
+        [Parameter(Mandatory = $true,
+            HelpMessage = 'Helpful Message')]
+        [ValidateNotNull()]
+        [ValidateNotNullOrEmpty()]
+        [string]$Uri
     )
-    try {
-        $day = (Get-Date -ErrorAction 'Stop').DayOfWeek
-    }
-    catch {
-        $day = 'Unknown'
-    }
-
-    return $day
-} #Get-Day
-
+    $response = TestURI -TestUri $Uri
+    return $response
+}

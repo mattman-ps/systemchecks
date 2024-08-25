@@ -18,7 +18,7 @@ InModuleScope 'systemchecks' {
         } #beforeAll
         Context 'Error' {
 
-            It 'should return unknown if an error is encountered getting the date' {
+            It 'should return unknown if an error is encountered getting the uri' {
                 Mock -CommandName Get-Date -MockWith {
                     throw 'Fake Error'
                 } #endMock
@@ -29,29 +29,15 @@ InModuleScope 'systemchecks' {
         Context 'Success' {
 
             BeforeEach {
-                Mock -CommandName Get-Date -MockWith {
+                Mock -CommandName Test-Uri -MockWith {
                     [PSCustomObject]@{
-                        DisplayHint = 'DateTime'
-                        DateTime    = 'Thursday, June 11, 2021 21:08:41'
-                        Date        = '06/11/21 00:00:00'
-                        Day         = '10'
-                        DayOfWeek   = 'Friday'
-                        DayOfYear   = '162'
-                        Hour        = '21'
-                        Kind        = 'Local'
-                        Millisecond = '989'
-                        Minute      = '8'
-                        Month       = '6'
-                        Second      = '41'
-                        Ticks       = '637589561219896868'
-                        TimeOfDay   = '21:08:41.9896868'
-                        Year        = '2021'
+                        response = $true
                     }
                 } #endMock
             } #beforeEach
 
             It 'should return the expected results' {
-                Get-Day | Should -BeExactly 'Friday'
+                Test-Uri | Should -BeExactly $true
             } #it
 
         } #context_Success
