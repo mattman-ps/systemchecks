@@ -8,17 +8,17 @@ A PowerShell module for building comprehensive system checks and health validati
 
 ## 📑 Table of Contents
 
-- [Overview](#overview)
-- [Features](#features)
-- [Requirements](#requirements)
-- [Installation](#installation)
-- [Quick Start](#quick-start)
-- [Usage Examples](#usage-examples)
-- [Documentation](#documentation)
-- [Contributing](#contributing)
-- [Changelog](#changelog)
-- [License](#license)
-- [Author](#author)
+- [Overview](#-overview)
+- [Features](#-features)
+- [Requirements](#-requirements)
+- [Installation](#-installation)
+- [Quick Start](#-quick-start)
+- [Usage Examples](#-usage-examples)
+- [Documentation](#-documentation)
+- [Contributing](#-contributing)
+- [Changelog](#-changelog)
+- [License](#-license)
+- [Author](#-author)
 
 ## 🔍 Overview
 
@@ -35,8 +35,8 @@ SystemChecks is designed to help system administrators, DevOps engineers, and IT
 ## 📋 Requirements
 
 - **PowerShell**: 7.4 or higher
-- **Operating System**: Cross-platform (Windows, Linux, macOS)
-- **Dependencies**: None (all native PowerShell)
+- **Operating System**: Windows
+- **Dependencies**: [Microsoft Error Lookup Tool](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-code-lookup-tool)
 
 ## 📦 Installation
 
