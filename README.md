@@ -6,7 +6,7 @@
 
 A PowerShell module for building comprehensive system checks and health validations. SystemChecks provides a framework for creating, organizing, and executing diagnostic checks across various system components and infrastructure.
 
-## Table of Contents
+## 📑 Table of Contents
 
 - [Overview](#overview)
 - [Features](#features)
@@ -20,11 +20,11 @@ A PowerShell module for building comprehensive system checks and health validati
 - [License](#license)
 - [Author](#author)
 
-## Overview
+## 🔍 Overview
 
 SystemChecks is designed to help system administrators, DevOps engineers, and IT professionals build robust validation frameworks for their infrastructure. Whether you're validating server configurations, checking application health, or monitoring system resources, SystemChecks provides the building blocks to create reliable and reusable check definitions.
 
-## Features
+## ✨ Features
 
 - **Modular Design**: Build reusable check components that can be combined and extended
 - **Flexible Framework**: Support for various types of system validations
@@ -32,13 +32,13 @@ SystemChecks is designed to help system administrators, DevOps engineers, and IT
 - **Extensible**: Easy to extend with custom check types and validators
 - **Well-Tested**: Comprehensive test coverage using Pester
 
-## Requirements
+## 📋 Requirements
 
 - **PowerShell**: 7.4 or higher
 - **Operating System**: Cross-platform (Windows, Linux, macOS)
 - **Dependencies**: None (all native PowerShell)
 
-## Installation
+## 📦 Installation
 
 ### From PowerShell Gallery
 
@@ -71,7 +71,7 @@ Get-Module -Name systemchecks
 Get-Command -Module systemchecks
 ```
 
-## Quick Start
+## 🚀 Quick Start
 
 ```powershell
 # Import the module
@@ -84,7 +84,7 @@ Import-Module systemchecks
 # Invoke-SystemCheck -Name "ServerHealthCheck"
 ```
 
-## Usage Examples
+## 💡 Usage Examples
 
 ### Example 1: Basic Health Check
 
@@ -107,7 +107,7 @@ Import-Module systemchecks
 # (Placeholder - will be updated with actual API)
 ```
 
-## Documentation
+## 📚 Documentation
 
 Full documentation is available at the project's [documentation site](https://mattman-ps.github.io/systemchecks/) (powered by MkDocs).
 
@@ -124,7 +124,7 @@ mkdocs serve
 mkdocs build
 ```
 
-## Development
+## 🛠️ Development
 
 ### Project Structure
 
@@ -155,7 +155,7 @@ Invoke-Pester -CodeCoverage '.\src\**\*.ps1'
 
 This project uses a custom build system. See [project.json](project.json) for configuration details.
 
-## Contributing
+## 🤝 Contributing
 
 Contributions are welcome! Please feel free to submit a Pull Request. For major changes, please open an issue first to discuss what you would like to change.
 
@@ -172,20 +172,20 @@ Please ensure your code:
 - Updates documentation as needed
 - Follows the existing code style
 
-## Changelog
+## 📝 Changelog
 
 See [CHANGELOG.md](CHANGELOG.md) for a list of changes and version history.
 
-## License
+## 📄 License
 
 This project is licensed under the terms specified in the [LICENSE](LICENSE) file.
 
-## Author
+## 👤 Author
 
 - GitHub: [@mattman-ps](https://github.com/mattman-ps)
 - Project Link: [https://github.com/mattman-ps/systemchecks](https://github.com/mattman-ps/systemchecks)
 
-## Acknowledgments
+## 🙏 Acknowledgments
 
 - Built with PowerShell 7.4+
 - Module designed using [ModuleTools](https://github.com/belibug/ModuleTools)
