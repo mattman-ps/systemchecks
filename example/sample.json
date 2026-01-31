@@ -1,0 +1,45 @@
+{
+	"$schema": "./schema/system_schema.json",
+	"systemName": "MattMan's Special System",
+	"description": "This is a sample system",
+	"FilesExist": [
+		{
+			"friendlyName": "Check for hosts file",
+			"filePath": "C:/windows/System32/drivers/etc/hosts"
+		}
+	],
+	"Processes": [
+		{
+			"friendlyName": "Microsoft OneDrive",
+			"name": "OneDrive"
+		},
+		{
+			"friendlyName": "WindowsPackageManagerServer.exe",
+			"name": "WindowsPackageManagerServer"
+		}
+	],
+	"Services": [
+		{
+			"friendlyName": "World Wide Web Publishing Service",
+			"name": "w3svc"
+		},
+		{
+			"friendlyName": "Background Intelligent Transfer Service",
+			"name": "BITS"
+		}
+	],
+	"URIs": [
+		{
+			"friendlyName": "Gitea Server",
+			"uri": "http://lserver1.local:3000/",
+			"useBasicParsing": true,
+			"useDefaultCredentials": false
+		}
+	],
+	"ScheduledTasks": [
+		{
+			"friendlyName": "Notification Task",
+			"taskpath": "\\Microsoft\\Windows\\WwanSvc\\NotificationTask"
+		}
+	]
+}

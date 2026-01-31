@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "required": [
+    "systemName"
+  ],
+  "properties": {
+    "systemName": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "FilesExist": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "filePath"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "filePath": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Processes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Services": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "name": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "URIs": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "uri"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "uri": {
+            "type": "string"
+          },
+          "useBasicParsing": {
+            "type": "boolean"
+          },
+          "useDefaultCredentials": {
+            "type": "boolean"
+          }
+        }
+      }
+    },
+    "ScheduledTasks": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "taskpath"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "taskpath": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
