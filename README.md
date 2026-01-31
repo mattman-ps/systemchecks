@@ -2,7 +2,9 @@
 
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/systemchecks)](https://www.powershellgallery.com/packages/systemchecks)
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/systemchecks)](https://www.powershellgallery.com/packages/systemchecks)
-[![License](https://img.shields.io/github/license/mattman-ps/systemchecks)](LICENSE)
+[![License](https://img.shields.io/github/license/mattman-ps/systemchecks)](https://github.com/mattman-ps/systemchecks/blob/main/LICENSE)
+[![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mattman-ps/systemchecks/docs.yml?label=docs)](https://github.com/mattman-ps/systemchecks/actions/workflows/docs.yml)
+[![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://mattman-ps.github.io/systemchecks/)
 
 A PowerShell module for building comprehensive system checks and health validations. SystemChecks provides a framework for creating, organizing, and executing diagnostic checks across various system components and infrastructure.
 
