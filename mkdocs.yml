@@ -1,40 +1,53 @@
 # https://www.mkdocs.org/user-guide/configuration/
 # https://www.mkdocs.org/user-guide/writing-your-docs/
 # https://www.mkdocs.org/user-guide/writing-your-docs/#writing-with-markdown
-# https://mkdocs.readthedocs.io/en/0.15.2/user-guide/writing-your-docs/
-# https://mkdocs.readthedocs.io/en/0.15.2/user-guide/styling-your-docs/
-# https://example-mkdocs-basic.readthedocs.io/en/latest/
-# https://github.com/mkdocs/mkdocs/blob/master/mkdocs.yml
 # mkdocs.yml
 
-site_name: systemchecks
-# site_url:
-# repo_url:
-# repo_name:
-# edit_uri: edit/main/docs/
-# edit_uri_template:
-site_description: Provide checks for testing various systems. # meta tag to the generated HTML header
-site_author: mattmanps # meta tag to the generated HTML header
-# copyright:
-# remote_branch:
-# remote_name:
-# docs_dir: docs
-# site_dir:
-# extra_css:
-# extra_javascript:
-# extra_templates:
-# extra:
+site_name: SystemChecks
+site_url: https://mattman-ps.github.io/systemchecks/
+repo_url: https://github.com/mattman-ps/systemchecks
+repo_name: mattman-ps/systemchecks
+edit_uri: edit/main/docs/
+site_description: A PowerShell module for building comprehensive system checks and health validations
+site_author: mattman-ps
+copyright: Copyright &copy; 2026 mattman-ps
+
 theme: readthedocs
-# theme:
-#     name: readthedocs
-#     locale: en
-    # custom_dir: my_theme_customizations/
-    # static_templates:
-    #     - sitemap.html
-    # include_sidebar: true
+
+# Documentation directory
+docs_dir: docs
+site_dir: site
+
+# Navigation structure
 nav:
   - Home: index.md
-  - Change Log: CHANGELOG.md
-  # - Functions:
-  #   - Function1: functions/function1.md
+  - Getting Started:
+    - Installation: getting-started/installation.md
+    - Quick Start: getting-started/quickstart.md
+    - Requirements: getting-started/requirements.md
+  - Usage:
+    - Overview: usage/overview.md
+    - Examples: usage/examples.md
+  - Development:
+    - Contributing: development/contributing.md
+    - Project Structure: development/structure.md
+    - Testing: development/testing.md
+  - Reference:
+    - Functions: reference/functions.md
+    - Classes: reference/classes.md
+  - Changelog: CHANGELOG.md
+  - License: LICENSE.md
+
+# Markdown extensions
+markdown_extensions:
+  - admonition
+  - codehilite:
+      guess_lang: false
+  - toc:
+      permalink: true
+  - pymdownx.highlight
+  - pymdownx.superfences
+  - pymdownx.inlinehilite
+  - pymdownx.tabbed
+  - pymdownx.details
 
