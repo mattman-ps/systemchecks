@@ -1,0 +1,5 @@
+<QueryList>
+  <Query Id="0" Path="Microsoft-Windows-TaskScheduler/Operational">
+    <Select Path="Microsoft-Windows-TaskScheduler/Operational">*[System[TimeCreated[@SystemTime&gt;='{0}' and @SystemTime&lt;='{1}']]]</Select>
+  </Query>
+</QueryList>

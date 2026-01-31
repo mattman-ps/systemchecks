@@ -1,0 +1,21 @@
+<!--
+
+    Specify milliseconds in parameter 0.  Example code:
+
+        $StartDate = Get-Date "2024-10-16 10:00 AM"
+        $EndDate = Get-Date "2024-10-17 01:50 PM"
+
+        $TimeSpan = New-TimeSpan -Start $StartDate -End $EndDate
+
+        # Access different properties of the TimeSpan object
+        $TimeSpan.TotalMilliSeconds
+
+    Notes on querying details:
+        https://powershell.org/2019/08/a-better-way-to-search-events/
+        https://techcommunity.microsoft.com/t5/ask-the-directory-services-team/advanced-xml-filtering-in-the-windows-event-viewer/ba-p/399761
+-->
+<QueryList>
+  <Query Id="0" Path="Microsoft-Windows-TaskScheduler/Operational">
+    <Select Path="Microsoft-Windows-TaskScheduler/Operational">*[System[(Level=2 or Level=3) and TimeCreated[timediff(@SystemTime) &lt;= {0}]]]</Select>
+  </Query>
+</QueryList>

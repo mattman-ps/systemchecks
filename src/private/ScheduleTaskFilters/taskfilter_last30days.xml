@@ -1,0 +1,6 @@
+<QueryList>
+    <Query Id="0"
+           Path="Microsoft-Windows-TaskScheduler/Operational">
+        <Select Path="Microsoft-Windows-TaskScheduler/Operational">*[System[TimeCreated[timediff(@SystemTime) &lt;= 2592000000]]]</Select>
+    </Query>
+</QueryList>
