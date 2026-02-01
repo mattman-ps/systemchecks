@@ -25,7 +25,7 @@ function Test-ScheduledTask {
     $path = Split-Path -Path $TaskPath -Parent
 
     try {
-        $taskdetail = Get-ScheduledTaskInfo -TaskName $task -TaskPath $path
+        $taskdetail = Get-ScheduledTaskInfo -TaskName $task -TaskPath $path -ErrorAction Stop
         if ($taskdetail -and $taskdetail.LastTaskResult -eq '0') {
             return [PSCustomObject]@{
                 SystemName          = $SystemName
