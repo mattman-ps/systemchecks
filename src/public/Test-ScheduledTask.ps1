@@ -87,7 +87,7 @@ function Test-ScheduledTask {
             Type                    = $HealthCheckType
             Status                  = 'ERROR'
             LastUpdate              = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-            Comment                 = $error[0].Exception.Message
+            Comment                 = "Task not found."
             ComputerName            = $ENV:COMPUTERNAME
         }
     }
