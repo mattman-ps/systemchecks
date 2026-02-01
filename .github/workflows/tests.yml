@@ -42,16 +42,5 @@ jobs:
           $config.Run.Path = "tests"
           $config.Run.Exit = $true
           $config.CodeCoverage.Enabled = $false
-          $config.TestResult.Enabled = $true
-          $config.TestResult.OutputFormat = 'NUnitXml'
-          $config.TestResult.OutputPath = 'testResults.xml'
           $config.Output.Verbosity = 'Detailed'
           Invoke-Pester -Configuration $config
-
-      - name: Publish Test Results
-        uses: EnricoMi/publish-unit-test-result-action/composite@v2
-        if: always()
-        with:
-          files: |
-            testResults.xml
-          check_name: Test Results
