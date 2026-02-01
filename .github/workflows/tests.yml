@@ -1,0 +1,57 @@
+name: Run Tests
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Pester
+        shell: pwsh
+        run: |
+          Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
+
+      - name: Build Module
+        shell: pwsh
+        run: |
+          if (Get-Command Invoke-MTBuild -ErrorAction SilentlyContinue) {
+            Invoke-MTBuild
+          } else {
+            Write-Host "Invoke-MTBuild not found. Checking for build script..."
+            if (Test-Path ".\build.ps1") {
+              .\build.ps1
+            } else {
+              Write-Host "No build process found. Continuing with tests..."
+            }
+          }
+
+      - name: Run Pester Tests
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = "tests"
+          $config.Run.Exit = $true
+          $config.CodeCoverage.Enabled = $false
+          $config.TestResult.Enabled = $true
+          $config.TestResult.OutputFormat = 'NUnitXml'
+          $config.TestResult.OutputPath = 'testResults.xml'
+          $config.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $config
+
+      - name: Publish Test Results
+        uses: EnricoMi/publish-unit-test-result-action/composite@v2
+        if: always()
+        with:
+          files: |
+            testResults.xml
+          check_name: Test Results

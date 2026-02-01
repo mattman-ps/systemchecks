@@ -3,6 +3,7 @@
 [![PowerShell Gallery Version](https://img.shields.io/powershellgallery/v/systemchecks)](https://www.powershellgallery.com/packages/systemchecks)
 [![PowerShell Gallery](https://img.shields.io/powershellgallery/dt/systemchecks)](https://www.powershellgallery.com/packages/systemchecks)
 [![License](https://img.shields.io/github/license/mattman-ps/systemchecks)](https://github.com/mattman-ps/systemchecks/blob/main/LICENSE)
+[![Tests](https://img.shields.io/github/actions/workflow/status/mattman-ps/systemchecks/tests.yml?label=tests)](https://github.com/mattman-ps/systemchecks/actions/workflows/tests.yml)
 [![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/mattman-ps/systemchecks/docs.yml?label=docs)](https://github.com/mattman-ps/systemchecks/actions/workflows/docs.yml)
 [![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://mattman-ps.github.io/systemchecks/)
 
