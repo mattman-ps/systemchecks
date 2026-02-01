@@ -77,7 +77,7 @@ function Test-URIHealth {
             Type              = $HealthCheckType
             Status            = 'ERROR'
             LastUpdate        = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-            Comment           = $Error[0].Exception.Message
+            Comment           = $_.Exception.Message
             ComputerName      = $ENV:COMPUTERNAME
         }
     }
