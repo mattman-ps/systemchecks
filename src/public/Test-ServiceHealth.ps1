@@ -22,30 +22,17 @@ function Test-ServiceHealth {
     $HealthCheckType = 'Service'
 
     try {
-        $service = Get-Service -Name $ServiceName
-        if (!$null -eq $service) {
-            if ($service.Status -eq 'Running') {
-                return [PSCustomObject]@{
-                    SystemName          = $SystemName
-                    SystemDescription   = $SystemDescription
-                    Name                = $ServiceName
-                    Type                = $HealthCheckType
-                    Status              = 'OK'
-                    LastUpdate          = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-                    Comment             = ""
-                    ComputerName        = $ENV:COMPUTERNAME
-                }
-            } else {
-                return [PSCustomObject]@{
-                    SystemName          = $SystemName
-                    SystemDescription   = $SystemDescription
-                    Name                = $ServiceName
-                    Type                = $HealthCheckType
-                    Status              = 'ERROR'
-                    LastUpdate          = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-                    Comment             = $service.Status
-                    ComputerName        = $ENV:COMPUTERNAME
-                }
+        $service = Get-Service -Name $ServiceName -ErrorAction Stop
+        if ($service.Status -eq 'Running') {
+            return [PSCustomObject]@{
+                SystemName          = $SystemName
+                SystemDescription   = $SystemDescription
+                Name                = $ServiceName
+                Type                = $HealthCheckType
+                Status              = 'OK'
+                LastUpdate          = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
+                Comment             = ""
+                ComputerName        = $ENV:COMPUTERNAME
             }
         } else {
             return [PSCustomObject]@{
@@ -55,7 +42,7 @@ function Test-ServiceHealth {
                 Type                = $HealthCheckType
                 Status              = 'ERROR'
                 LastUpdate          = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-                Comment             = $Error[0].Exception.Message
+                Comment             = $service.Status
                 ComputerName        = $ENV:COMPUTERNAME
             }
         }
@@ -67,7 +54,7 @@ function Test-ServiceHealth {
             Type                    = $HealthCheckType
             Status                  = 'ERROR'
             LastUpdate              = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
-            Comment                 = $Error[0].Exception.Message
+            Comment                 = $_.Exception.Message
             ComputerName        = $ENV:COMPUTERNAME
         }
     }
