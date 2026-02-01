@@ -21,7 +21,22 @@ function Test-ShareExists {
 
     $HealthCheckType = 'ShareExists'
 
-    $ShareName = [System.IO.Path]::GetFileName($SharePath)
+    # Extract share name - handle UNC paths, drive letters, and regular paths
+    if ($SharePath -match '^\\\\[^\\]+\\([^\\]+)') {
+        # UNC path like \\server\share
+        $ShareName = $matches[1]
+    }
+    elseif ($SharePath -match '^([A-Z]:)') {
+        # Drive letter like C:
+        $ShareName = $matches[1]
+    }
+    else {
+        # Fall back to GetFileName for other paths
+        $ShareName = [System.IO.Path]::GetFileName($SharePath)
+        if ([string]::IsNullOrEmpty($ShareName)) {
+            $ShareName = $SharePath
+        }
+    }
 
     try {
         if (Test-Path -Path $SharePath) {
