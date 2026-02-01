@@ -24,16 +24,7 @@ jobs:
       - name: Build Module
         shell: pwsh
         run: |
-          if (Get-Command Invoke-MTBuild -ErrorAction SilentlyContinue) {
-            Invoke-MTBuild
-          } else {
-            Write-Host "Invoke-MTBuild not found. Checking for build script..."
-            if (Test-Path ".\build.ps1") {
-              .\build.ps1
-            } else {
-              Write-Host "No build process found. Continuing with tests..."
-            }
-          }
+          .\build.ps1
 
       - name: Run Pester Tests
         shell: pwsh
