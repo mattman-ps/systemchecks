@@ -1,14 +1,17 @@
 {
   "ProjectName": "systemchecks",
-  "Description": "Module for building system checks",
+  "Description": "PowerShell module for building comprehensive system health checks and infrastructure validations",
   "Version": "0.0.1",
   "copyResourcesToModuleRoot": false,
   "Manifest": {
     "Author": "mattman-ps",
     "PowerShellHostVersion": "7.4",
     "GUID": "08d6810d-5aca-421f-8f3f-c892fa974b7a",
-    "Tags": [],
-    "ProjectUri": "https://github.com/mattman-ps/systemchecks"
+    "Tags": ["SystemHealth", "Monitoring", "Diagnostics", "Infrastructure", "Validation", "HealthCheck", "PSEdition_Core"],
+    "LicenseUri": "https://github.com/mattman-ps/systemchecks/blob/main/LICENSE",
+    "ProjectUri": "https://github.com/mattman-ps/systemchecks",
+    "IconUri": "https://raw.githubusercontent.com/mattman-ps/systemchecks/main/assets/icon.png",
+    "ReleaseNotes": "Initial release with core health check functions for services, scheduled tasks, files, processes, URIs, and system health monitoring"
   },
   "Pester": {
     "TestResult": {
