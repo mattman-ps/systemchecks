@@ -83,7 +83,7 @@ function Test-ScheduledTask {
         return [PSCustomObject]@{
             SystemName              = $SystemName
             SystemDescription       = $SystemDescription
-            Name                    = $URI
+            Name                    = $TaskPath
             Type                    = $HealthCheckType
             Status                  = 'ERROR'
             LastUpdate              = (Get-Date -Format 'yyyy-MM-dd HH:mm:ss')
