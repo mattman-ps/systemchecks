@@ -17,19 +17,6 @@ function Get-SystemHealth {
         [System.Object[]]$ConfigFileName
     )
 
-    $ScriptDirectory = Split-Path $Script:MyInvocation.MyCommand.Path -Parent
-    $IncludesPath = Join-Path -Path $ScriptDirectory -ChildPath "Includes"
-
-    . (Join-Path -Path $IncludesPath -ChildPath "Get-Win32Error.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-FileExists.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-ShareExists.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-ProcessHealth.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-ScheduledTask.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-ServiceHealth.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-TimeSync.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Test-URIHealth.ps1")
-    . (Join-Path -Path $IncludesPath -ChildPath "Get-FileCount.ps1")
-
     $ConfigFileName | ForEach-Object {
         
         $ConfigFile = $_
