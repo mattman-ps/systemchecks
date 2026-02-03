@@ -9,7 +9,7 @@
  .Parameter
 
  .Example
-Test-ScheduledTask -TaskPath "\SLMPD\Send OnCallSchedule"
+Test-ScheduledTask -TaskPath "\Tasks\Send Email"
  #>
 function Test-ScheduledTask {
     [CmdletBinding()]

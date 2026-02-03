@@ -9,7 +9,7 @@
  .Parameter
 
  .Example
-Test-URIHealth -URI "\SLMPD\Send OnCallSchedule"
+Test-URIHealth -URI "http://server/health"
  #>
 function Test-URIHealth {
     [CmdletBinding()]

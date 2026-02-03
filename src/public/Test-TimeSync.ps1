@@ -9,7 +9,7 @@
  .Parameter
 
  .Example
-Test-TimeSync -System1Name "netviewer1" -System2Name "cad1" -Verbose
+Test-TimeSync -System1Name "server1" -System2Name "server" -Verbose
  #>
 function Test-TimeSync {
     [CmdletBinding()]

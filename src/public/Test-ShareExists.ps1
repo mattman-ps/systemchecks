@@ -9,7 +9,7 @@
  .Parameter
 
  .Example
-Test-FileShare -SharePath "\\tapp1\e$"
+Test-FileShare -SharePath "\\server\e$"
  #>
 function Test-ShareExists {
     [CmdletBinding()]
