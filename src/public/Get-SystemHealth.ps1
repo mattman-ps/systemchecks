@@ -9,6 +9,7 @@
  .Parameter
 
  .Example
+Get-SystemHealth -ConfigFileName ".\config_files\system1.json"," .\config_files\system2.json"
 
  #>
 function Get-SystemHealth {
