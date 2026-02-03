@@ -3,10 +3,7 @@
 ## System Requirements
 
 - **PowerShell**: Version 7.4 or higher
-- **Operating System**: Cross-platform support
-  - Windows 10/11 or Windows Server 2016+
-  - Linux (various distributions)
-  - macOS 10.13 or higher
+- **Operating System**: Windows 10/11 or Windows Server 2016+
 
 ## Dependencies
 
