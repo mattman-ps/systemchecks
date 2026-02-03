@@ -78,34 +78,108 @@ Get-Command -Module systemchecks
 # Import the module
 Import-Module systemchecks
 
-# Create a basic system check
-# (Examples will be updated as the module develops)
+# View available commands
+Get-Command -Module systemchecks
 
-# Execute system checks
-# Invoke-SystemCheck -Name "ServerHealthCheck"
+# Run a simple health check
+Test-ServiceHealth -ServiceName 'w3svc'
 ```
+
+## 📋 Available Functions
+
+SystemChecks provides the following functions for building health checks:
+
+- **[Get-SystemHealth](#get-systemhealth)** - Orchestrates comprehensive health checks using JSON configuration files
+- **[Test-ProcessHealth](#test-processhealth)** - Check if a process is running and responding
+- **[Test-ServiceHealth](#test-servicehealth)** - Verify the status of Windows services
+- **[Test-FileExists](#test-fileexists)** - Check if a file path exists
+- **[Test-ShareExists](#test-shareexists)** - Verify if a network share path is accessible
+- **[Test-ScheduledTask](#test-scheduledtask)** - Get the status of scheduled tasks
+- **[Test-URIHealth](#test-urihealth)** - Check the health of web endpoints
+- **[Test-TimeSync](#test-timesync)** - Compare time synchronization between systems
+- **[Get-FileCount](#get-filecount)** - Get a count of files in a directory
+- **[Get-Win32Error](#get-win32error)** - Look up detailed Windows error information
 
 ## 💡 Usage Examples
 
-### Example 1: Basic Health Check
+### Get-SystemHealth
+
+Run comprehensive health checks using a JSON configuration file:
 
 ```powershell
-# Define a basic health check
-# (Placeholder - will be updated with actual API)
+Get-SystemHealth -ConfigFileName ".\config_files\system1.json", ".\config_files\system2.json"
 ```
 
-### Example 2: Custom Validation
+### Test-ProcessHealth
+
+Check if a process is running and responding:
 
 ```powershell
-# Create custom validation logic
-# (Placeholder - will be updated with actual API)
+Test-ProcessHealth -ProcessName "explorer"
 ```
 
-### Example 3: Batch Checks
+### Test-ServiceHealth
+
+Verify the status of a Windows service:
 
 ```powershell
-# Run multiple checks
-# (Placeholder - will be updated with actual API)
+Test-ServiceHealth -ServiceName 'w3svc'
+```
+
+### Test-FileExists
+
+Check if a file path exists:
+
+```powershell
+Test-FileExists -FilePath "c:\my\file"
+```
+
+### Test-ShareExists
+
+Verify if a network share path is accessible:
+
+```powershell
+Test-ShareExists -SharePath "\\server\e$"
+```
+
+### Test-ScheduledTask
+
+Get the status of a scheduled task:
+
+```powershell
+Test-ScheduledTask -TaskPath "\Tasks\Send Email"
+```
+
+### Test-URIHealth
+
+Check the health of a web endpoint:
+
+```powershell
+Test-URIHealth -URI "http://server/health"
+```
+
+### Test-TimeSync
+
+Compare time synchronization between two systems:
+
+```powershell
+Test-TimeSync -System1Name "server1" -System2Name "server2" -Verbose
+```
+
+### Get-FileCount
+
+Get a count of files in a directory:
+
+```powershell
+Get-FileCount -FilePath "c:\my\folder"
+```
+
+### Get-Win32Error
+
+Look up detailed Windows error information:
+
+```powershell
+Get-Win32Error 0x80070005  # Access Denied error
 ```
 
 ## 📚 Documentation
