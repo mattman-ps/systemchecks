@@ -1,0 +1,88 @@
+name: Publish to PowerShell Gallery
+
+on:
+  push:
+    tags:
+      - 'v*'
+  workflow_dispatch:
+    inputs:
+      publish:
+        description: 'Publish to PowerShell Gallery'
+        required: true
+        default: false
+        type: boolean
+
+jobs:
+  test:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        shell: pwsh
+        run: |
+          Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
+
+      - name: Build Module
+        shell: pwsh
+        run: |
+          Invoke-MTBuild
+
+      - name: Run Pester Tests
+        shell: pwsh
+        run: |
+          $config = New-PesterConfiguration
+          $config.Run.Path = "tests"
+          $config.Run.Exit = $true
+          $config.CodeCoverage.Enabled = $false
+          $config.Output.Verbosity = 'Detailed'
+          Invoke-Pester -Configuration $config
+
+  publish:
+    needs: test
+    runs-on: windows-latest
+    environment: powershell-gallery
+    if: startsWith(github.ref, 'refs/tags/v') || (github.event_name == 'workflow_dispatch' && github.event.inputs.publish == 'true')
+    permissions:
+      contents: read
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Install Dependencies
+        shell: pwsh
+        run: |
+          Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
+
+      - name: Build Module
+        shell: pwsh
+        run: |
+          Invoke-MTBuild
+
+      - name: Publish to PowerShell Gallery
+        shell: pwsh
+        env:
+          PSGALLERY_API_KEY: ${{ secrets.PSGALLERY_API_KEY }}
+        run: |
+          if ([string]::IsNullOrEmpty($env:PSGALLERY_API_KEY)) {
+              throw "PSGALLERY_API_KEY secret not configured"
+          }
+          
+          $modulePath = "dist"
+          
+          if (-not (Test-Path $modulePath)) {
+              throw "Module path not found: $modulePath"
+          }
+          
+          Write-Host "Publishing from: $modulePath"
+          
+          $publishParams = @{
+              Path       = $modulePath
+              Repository = 'PSGallery'
+              NuGetApiKey = $env:PSGALLERY_API_KEY
+              Force      = $true
+          }
+          
+          Publish-Module @publishParams -Verbose
