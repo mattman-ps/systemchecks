@@ -70,15 +70,24 @@ jobs:
               throw "PSGALLERY_API_KEY secret not configured"
           }
           
-            # Find the .psd1 file in dist folder
-            $psd1 = Get-ChildItem -Path "dist" -Filter "*.psd1" -Recurse | Select-Object -First 1
+          # Find the .psd1 file in dist folder
+          $psd1 = Get-ChildItem -Path "dist" -Filter "*.psd1" -Recurse | Select-Object -First 1
           
-            if (-not $psd1) {
+          if (-not $psd1) {
               throw "No .psd1 module file found in dist folder"
-            }
+          }
           
-            $modulePath = $psd1.Directory.FullName
-            Write-Host "Publishing module from: $modulePath"
+          $modulePath = $psd1.Directory.FullName
+          $moduleName = $psd1.BaseName
+          $moduleVersion = (Import-PowerShellDataFile -Path $psd1.FullName).ModuleVersion.ToString()
+          Write-Host "Publishing module from: $modulePath"
+          Write-Host "Module: $moduleName Version: $moduleVersion"
+          
+          $existing = Find-Module -Name $moduleName -Repository PSGallery -ErrorAction SilentlyContinue
+          if ($existing -and $existing.Version.ToString() -eq $moduleVersion) {
+              Write-Host "Version $moduleVersion already exists on PSGallery. Skipping publish."
+              exit 0
+          }
           
           $publishParams = @{
               Path       = $modulePath
