@@ -46,7 +46,7 @@ function Get-SystemHealth {
                 SystemName        = $SystemName
                 SystemDescription = $SystemDescription
             }
-            $SystemHealthData += Test-ServiceHealth @serviceSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-ServiceHealth @serviceSplat))
         }
 
         $file.FilesExist | ForEach-Object {
