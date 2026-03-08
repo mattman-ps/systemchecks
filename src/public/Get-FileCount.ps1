@@ -1,15 +1,33 @@
 #Requires -Version 5
 <#
  .Synopsis
- Get a file count from a given path.
+ Count the number of files in a directory.
 
  .Description
- Get a file count from a given path.  Can handle network shares as well.
+ Returns the count of files (not sub-directories) in the specified path.
+ Optionally appends a date-based sub-folder to the base path using the
+ AppendLeaf and LeafFormat parameters — handy for checking whether today's
+ or yesterday's output files were created by a batch process.
 
- .Parameter
+ .Parameter FilePath
+ Base directory path to check.
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
+
+ .Parameter AppendLeaf
+ When set, a date sub-folder is appended to FilePath.  Accepted values:
+ 'Today' (current date) or 'Yesterday' (previous day).
+
+ .Parameter LeafFormat
+ The date format string passed to Get-Date when building the sub-folder name,
+ e.g. 'yyyyMMdd'.
 
  .Example
-Get-FileCount FilePath "c:\my\file"
+Get-FileCount -FilePath "c:\my\folder"
  #>
 function Get-FileCount {
     [CmdletBinding()]

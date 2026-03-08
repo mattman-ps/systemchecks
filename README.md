@@ -5,7 +5,7 @@
 [![Tests](https://img.shields.io/github/actions/workflow/status/mattman-ps/systemchecks/tests.yml?label=tests)](https://github.com/mattman-ps/systemchecks/actions/workflows/tests.yml)
 [![Documentation](https://img.shields.io/badge/docs-mkdocs-blue)](https://mattman-ps.github.io/systemchecks/)
 
-A PowerShell module for building comprehensive system checks and health validations. SystemChecks provides a framework for creating, organizing, and executing diagnostic checks across various system components and infrastructure.
+A PowerShell module for running repeatable system health checks across Windows infrastructure.  I got tired of writing one-off diagnostic scripts that lived in random folders and couldn't be reused, so I packaged the patterns I kept reaching for into a proper module.
 
 ## 📑 Table of Contents
 
@@ -23,21 +23,21 @@ A PowerShell module for building comprehensive system checks and health validati
 
 ## 🔍 Overview
 
-SystemChecks is designed to help system administrators, DevOps engineers, and IT professionals build robust validation frameworks for their infrastructure. Whether you're validating server configurations, checking application health, or monitoring system resources, SystemChecks provides the building blocks to create reliable and reusable check definitions.
+SystemChecks lets you describe what a healthy system looks like in a JSON file — which services should be running, which files should exist, which web endpoints should return 200 — and then run all of those checks in one go.  Results come back as a flat list of objects that you can filter, export, or feed into whatever alerting pipeline you use.
 
 ## ✨ Features
 
-- **Modular Design**: Build reusable check components that can be combined and extended
-- **Flexible Framework**: Support for various types of system validations
+- **JSON-driven checks**: Define checks in a config file rather than writing a new script every time
+- **Consistent output shape**: Every check returns the same properties, so piping to `Where-Object`, `Export-Csv`, etc. always works the same way
 - **PowerShell Native**: Leverages PowerShell 7.4+ features for modern scripting
-- **Extensible**: Easy to extend with custom check types and validators
-- **Well-Tested**: Comprehensive test coverage using Pester
+- **Individual functions available**: You can also call any check function directly without a config file
+- **Pester-tested**: Functions have unit tests covering both happy-path and error scenarios
 
 ## 📋 Requirements
 
 - **PowerShell**: 7.4 or higher
 - **Operating System**: Windows
-- **Dependencies**: [Microsoft Error Lookup Tool](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-code-lookup-tool)
+- **Dependencies**: [Microsoft Error Lookup Tool](https://learn.microsoft.com/en-us/windows/win32/debug/system-error-code-lookup-tool) (required only for `Get-Win32Error` / scheduled task error code lookup)
 
 ## 📦 Installation
 
@@ -83,31 +83,37 @@ Get-Command -Module systemchecks
 
 # Run a simple health check
 Test-ServiceHealth -ServiceName 'w3svc'
+
+# Run checks from a config file and filter to anything not OK
+Get-SystemHealth -ConfigFileName ".\config_files\system1.json" |
+    Where-Object { $_.Status -notin @('OK','Exists','Responding') }
 ```
 
 ## 📋 Available Functions
 
 SystemChecks provides the following functions for building health checks:
 
-- **[Get-SystemHealth](#get-systemhealth)** - Orchestrates comprehensive health checks using JSON configuration files
+- **[Get-SystemHealth](#get-systemhealth)** - Orchestrates all checks defined in one or more JSON config files
 - **[Test-ProcessHealth](#test-processhealth)** - Check if a process is running and responding
-- **[Test-ServiceHealth](#test-servicehealth)** - Verify the status of Windows services
-- **[Test-FileExists](#test-fileexists)** - Check if a file path exists
-- **[Test-ShareExists](#test-shareexists)** - Verify if a network share path is accessible
-- **[Test-ScheduledTask](#test-scheduledtask)** - Get the status of scheduled tasks
-- **[Test-URIHealth](#test-urihealth)** - Check the health of web endpoints
-- **[Test-TimeSync](#test-timesync)** - Compare time synchronization between systems
-- **[Get-FileCount](#get-filecount)** - Get a count of files in a directory
-- **[Get-Win32Error](#get-win32error)** - Look up detailed Windows error information
+- **[Test-ServiceHealth](#test-servicehealth)** - Verify the running status of a Windows service
+- **[Test-FileExists](#test-fileexists)** - Check if a file or directory path exists
+- **[Test-ShareExists](#test-shareexists)** - Verify if a UNC share or drive path is accessible
+- **[Test-ScheduledTask](#test-scheduledtask)** - Get the last-run status of a scheduled task
+- **[Test-URIHealth](#test-urihealth)** - Check that a web endpoint returns HTTP 200
+- **[Test-TimeSync](#test-timesync)** - Compare the date/time on two remote systems to spot NTP drift
+- **[Get-FileCount](#get-filecount)** - Count files in a directory (supports date-based sub-folders)
+- **[Get-Win32Error](#get-win32error)** - Look up a human-readable description for a Windows error code
 
 ## 💡 Usage Examples
 
 ### Get-SystemHealth
 
-Run comprehensive health checks using a JSON configuration file:
+Run all checks defined in a config file and show anything that isn't healthy:
 
 ```powershell
-Get-SystemHealth -ConfigFileName ".\config_files\system1.json", ".\config_files\system2.json"
+Get-SystemHealth -ConfigFileName ".\config_files\system1.json" |
+    Where-Object { $_.Status -notin @('OK','Exists','Responding') } |
+    Format-Table SystemName, Name, Type, Status, Comment -AutoSize
 ```
 
 ### Test-ProcessHealth
@@ -172,6 +178,9 @@ Get a count of files in a directory:
 
 ```powershell
 Get-FileCount -FilePath "c:\my\folder"
+
+# Count files in today's dated sub-folder (e.g. c:\exports\20260308)
+Get-FileCount -FilePath "c:\exports" -AppendLeaf Today -LeafFormat yyyyMMdd
 ```
 
 ### Get-Win32Error
@@ -263,10 +272,11 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 ## 🙏 Acknowledgments
 
 - Built with PowerShell 7.4+
-- Module designed using [ModuleTools](https://github.com/belibug/ModuleTools)
+- Module scaffolded using [ModuleTools](https://github.com/belibug/ModuleTools)
 - Testing powered by [Pester](https://pester.dev/)
 - Documentation generated with [MkDocs](https://www.mkdocs.org/)
 
 ---
 
 **Note**: This module is currently in early development (v0.0.1). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
+

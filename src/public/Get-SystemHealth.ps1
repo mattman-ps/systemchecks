@@ -1,15 +1,19 @@
 #Requires -Version 5
 <#
  .Synopsis
- Analyze different components of a system.
+ Run health checks against one or more systems defined in JSON config files.
 
  .Description
- Analyze different components of a system. A system can be any collection of items to check.
+ Reads one or more JSON configuration files and runs the appropriate health checks
+ (processes, services, files, shares, URIs, scheduled tasks, file counts) for each
+ system defined.  Results are collected into a flat list and written to an output
+ JSON file under .\output_files\.
 
- .Parameter
+ .Parameter ConfigFileName
+ One or more FileInfo or path objects pointing to the JSON configuration files to process.
 
  .Example
-Get-SystemHealth -ConfigFileName ".\config_files\system1.json"," .\config_files\system2.json"
+Get-SystemHealth -ConfigFileName ".\config_files\system1.json",".\config_files\system2.json"
 
  #>
 function Get-SystemHealth {
@@ -61,41 +65,41 @@ function Get-SystemHealth {
                 SystemDescription = $SystemDescription
             }
             $SystemHealthData += Test-ShareExists @checkshareSplat
-
-            $File.URIs | ForEach-Object {
-                $checkURISplat = @{
-                    URI               = $_.URI
-                    SystemName        = $SystemName
-                    SystemDescription = $SystemDescription
-                    UseBasicParsing = $_.useBasicParsing
-                    UseDefaultCredentials = $_.useDefaultCredentials
-                }
-                $SystemHealthData += Test-URIHealth @checkURISplat
-            }
-
-            $file.ScheduledTasks | ForEach-Object {
-                $schedtaskSplat = @{
-                    TaskPath          = $_.TaskPath
-                    SystemName        = $SystemName
-                    SystemDescription = $SystemDescription
-                }
-                $SystemHealthData += Test-ScheduledTask @schedtaskSplat
-            }
-
-            $file.FileCount | ForEach-Object {
-                $filecountSplat = @{
-                    FilePath          = $_.FilePath
-                    SystemName        = $SystemName
-                    SystemDescription = $SystemDescription
-                    AppendLeaf        = $_.appendLeaf
-                    LeafFormat        = $_.leafFormat
-                }
-                $SystemHealthData += Get-FileCount @filecountSplat
-            }
-
-            $OutFileName = ".\output_files\healthcheck_$($ENV:COMPUTERNAME)_$($ConfigFile.Name)"
-            $SystemHealthData | ConvertTo-Json | Out-File (New-Item -Path $OutFileName -Force)
         }
+
+        $File.URIs | ForEach-Object {
+            $checkURISplat = @{
+                URI                   = $_.URI
+                SystemName            = $SystemName
+                SystemDescription     = $SystemDescription
+                UseBasicParsing       = $_.useBasicParsing
+                UseDefaultCredentials = $_.useDefaultCredentials
+            }
+            $SystemHealthData += Test-URIHealth @checkURISplat
+        }
+
+        $file.ScheduledTasks | ForEach-Object {
+            $schedtaskSplat = @{
+                TaskPath          = $_.TaskPath
+                SystemName        = $SystemName
+                SystemDescription = $SystemDescription
+            }
+            $SystemHealthData += Test-ScheduledTask @schedtaskSplat
+        }
+
+        $file.FileCount | ForEach-Object {
+            $filecountSplat = @{
+                FilePath          = $_.FilePath
+                SystemName        = $SystemName
+                SystemDescription = $SystemDescription
+                AppendLeaf        = $_.appendLeaf
+                LeafFormat        = $_.leafFormat
+            }
+            $SystemHealthData += Get-FileCount @filecountSplat
+        }
+
+        $OutFileName = ".\output_files\healthcheck_$($ENV:COMPUTERNAME)_$($ConfigFile.Name)"
+        $SystemHealthData | ConvertTo-Json | Out-File (New-Item -Path $OutFileName -Force)
         $SystemHealthData
     }
 }

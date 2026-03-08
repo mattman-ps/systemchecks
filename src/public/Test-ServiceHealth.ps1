@@ -1,12 +1,21 @@
 #Requires -Version 5
 <# 
  .Synopsis
- Get status of a windows service.
+ Check the running status of a Windows service.
 
  .Description
- Get status of a windows service.
+ Retrieves the named service using Get-Service and checks whether it is in the
+ Running state.  Returns 'OK' if running, or 'ERROR' with the current status in
+ the Comment field if stopped, paused, or not found.
 
- .Parameter
+ .Parameter ServiceName
+ The short service name (not the display name) to check, e.g. 'w3svc'.
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
 
  .Example
 Test-ServiceHealth -ServiceName 'w3svc'

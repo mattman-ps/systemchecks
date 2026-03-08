@@ -1,12 +1,21 @@
 #Requires -Version 5
 <#
  .Synopsis
- See if a process is running.
+ Check if a process is running and responding.
 
  .Description
- See if a process is running.
+ Uses Get-Process to find the named process and checks the Responding flag.
+ Returns 'Responding' if the process is found and not hung, or 'ERROR' if the
+ process is not running or is unresponsive.
 
- .Parameter
+ .Parameter ProcessName
+ The name of the process to check (without the .exe extension).
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
 
  .Example
 Test-ProcessHealth -ProcessName "explorer"
