@@ -55,7 +55,7 @@ function Get-SystemHealth {
                 SystemName        = $SystemName
                 SystemDescription = $SystemDescription
             }
-            $SystemHealthData += Test-FileExists @checkfileSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-FileExists @checkfileSplat))
         }
 
         $file.SharesExist | ForEach-Object {
