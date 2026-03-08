@@ -70,13 +70,15 @@ jobs:
               throw "PSGALLERY_API_KEY secret not configured"
           }
           
-          $modulePath = "dist"
+            # Find the .psd1 file in dist folder
+            $psd1 = Get-ChildItem -Path "dist" -Filter "*.psd1" -Recurse | Select-Object -First 1
           
-          if (-not (Test-Path $modulePath)) {
-              throw "Module path not found: $modulePath"
-          }
+            if (-not $psd1) {
+              throw "No .psd1 module file found in dist folder"
+            }
           
-          Write-Host "Publishing from: $modulePath"
+            $modulePath = $psd1.Directory.FullName
+            Write-Host "Publishing module from: $modulePath"
           
           $publishParams = @{
               Path       = $modulePath
