@@ -23,7 +23,7 @@ A PowerShell module for running repeatable system health checks across Windows i
 
 ## 🔍 Overview
 
-SystemChecks lets you describe what a healthy system looks like in a JSON file — which services should be running, which files should exist, which web endpoints should return 200 and then run all of those checks in one go.  Results come back as a flat list of objects that you can filter, export, or feed into whatever alerting pipeline you use.
+SystemChecks lets you describe what a healthy system looks like in a JSON file, which services should be running, which files should exist, which web endpoints should return 200 and then run all of those checks in one go.  Results come back as a flat list of objects that you can filter, export, or feed into whatever alerting pipeline you use.
 
 ## ✨ Features
 
