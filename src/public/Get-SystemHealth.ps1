@@ -37,7 +37,7 @@ function Get-SystemHealth {
                 SystemName        = $SystemName
                 SystemDescription = $SystemDescription
             }
-            $SystemHealthData += Test-ProcessHealth @procSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-ProcessHealth @procSplat))
         }
 
         $file.Services | ForEach-Object {
