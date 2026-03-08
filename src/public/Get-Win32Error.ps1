@@ -15,7 +15,8 @@
 
  NOTE:  By default, this function checks errors against the winerror.h file.
 
- .Parameter
+ .Parameter ErrorCode
+ The numeric error code to look up.  Accepts decimal or hex integers, e.g. 5 or 0x80070005.
 
  .Example
  Get-Win32Error 0x80070005 # Access Denied error

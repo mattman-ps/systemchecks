@@ -1,12 +1,22 @@
 #Requires -Version 5
 <#
  .Synopsis
- Get status of a scheduled task.
+ Get the last-run status of a scheduled task.
 
  .Description
- Get status of a scheduled task.
+ Retrieves task run information using Get-ScheduledTaskInfo and checks
+ LastTaskResult.  A result of 0 means the task completed successfully.
+ Any other code is looked up via Get-Win32Error so you get a human-readable
+ description rather than a raw hex value.
 
- .Parameter
+ .Parameter TaskPath
+ Full task path including folder, e.g. '\Tasks\Send Email'.
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
 
  .Example
 Test-ScheduledTask -TaskPath "\Tasks\Send Email"

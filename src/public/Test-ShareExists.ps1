@@ -1,15 +1,26 @@
 #Requires -Version 5
 <#
  .Synopsis
- See if a share path exists.
+ Check whether a network share or local path is accessible.
 
  .Description
- See if a share path exists.
+ Uses Test-Path to verify access to a UNC share, drive letter, or local path.
+ Handles UNC paths (\\server\share), drive letters (C:), and plain paths, and
+ extracts a meaningful share name for reporting in each case.
+ Returns 'Exists' when the path is reachable, 'Not Found' when it is not, or
+ 'ERROR' if an exception is raised.
 
- .Parameter
+ .Parameter SharePath
+ The path to test, e.g. '\\server\e$' or 'D:\Data'.
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
 
  .Example
-Test-FileShare -SharePath "\\server\e$"
+Test-ShareExists -SharePath "\\server\e$"
  #>
 function Test-ShareExists {
     [CmdletBinding()]

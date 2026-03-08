@@ -1,15 +1,23 @@
 #Requires -Version 5
 <#
  .Synopsis
- Analyze different components of a system.
+ Compare the current date/time on two remote systems.
 
  .Description
- Analyze different components of a system. A system can be any collection of items to check.
+ Opens a temporary PSSession to each system, retrieves the current date/time,
+ and calculates the difference as a TimeSpan.  Useful for spotting NTP drift
+ between servers that need to stay in sync (e.g. domain controllers or cluster
+ nodes).  If a session cannot be established, the affected system is reported
+ as 'ERROR' and the difference is returned as 0.
 
- .Parameter
+ .Parameter System1Name
+ Hostname or IP address of the first system.
+
+ .Parameter System2Name
+ Hostname or IP address of the second system.
 
  .Example
-Test-TimeSync -System1Name "server1" -System2Name "server" -Verbose
+Test-TimeSync -System1Name "server1" -System2Name "server2" -Verbose
  #>
 function Test-TimeSync {
     [CmdletBinding()]
@@ -59,7 +67,7 @@ function Test-TimeSync {
             Comment        = "Unable to establish a session with '$System2Name'"
         }
     }
-    if ($System1DateTime.Status -eq 'error' -or $System2DateTime.Status -eq 'error') {
+    if ($System1DateTime.Status -eq 'ERROR' -or $System2DateTime.Status -eq 'ERROR') {
         $DateTimeDifference = 0
         $Status = "ERROR"
     }

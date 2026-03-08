@@ -1,12 +1,21 @@
 #Requires -Version 5
 <#
  .Synopsis
- See if a file path exists.
+ Check whether a file or directory path exists.
 
  .Description
- See if a file path exists.
+ Uses Test-Path to determine whether the supplied path is present on disk.
+ Returns 'Exists' when the path is found, 'Not Found' when it is absent, or
+ 'ERROR' if an unexpected exception occurs (e.g. access denied, invalid path).
 
- .Parameter
+ .Parameter FilePath
+ Full path to the file or directory to check.
+
+ .Parameter SystemName
+ Friendly name for the system this check belongs to (used in reporting).
+
+ .Parameter SystemDescription
+ Short description of the system (used in reporting).
 
  .Example
 Test-FileExists -FilePath "c:\my\file"
