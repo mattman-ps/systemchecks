@@ -64,7 +64,7 @@ function Get-SystemHealth {
                 SystemName        = $SystemName
                 SystemDescription = $SystemDescription
             }
-            $SystemHealthData += Test-ShareExists @checkshareSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-ShareExists @checkshareSplat))
         }
 
         $File.URIs | ForEach-Object {
@@ -75,7 +75,7 @@ function Get-SystemHealth {
                 UseBasicParsing       = $_.useBasicParsing
                 UseDefaultCredentials = $_.useDefaultCredentials
             }
-            $SystemHealthData += Test-URIHealth @checkURISplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-URIHealth @checkURISplat))
         }
 
         $file.ScheduledTasks | ForEach-Object {
@@ -84,7 +84,7 @@ function Get-SystemHealth {
                 SystemName        = $SystemName
                 SystemDescription = $SystemDescription
             }
-            $SystemHealthData += Test-ScheduledTask @schedtaskSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-ScheduledTask @schedtaskSplat))
         }
 
         $file.FileCount | ForEach-Object {
@@ -95,7 +95,7 @@ function Get-SystemHealth {
                 AppendLeaf        = $_.appendLeaf
                 LeafFormat        = $_.leafFormat
             }
-            $SystemHealthData += Get-FileCount @filecountSplat
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Get-FileCount @filecountSplat))
         }
 
         $OutFileName = ".\output_files\healthcheck_$($ENV:COMPUTERNAME)_$($ConfigFile.Name)"

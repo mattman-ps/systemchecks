@@ -496,9 +496,9 @@ Describe 'Integration Tests' {
 
         It 'Should check multiple services' {
             $services = Get-Service | Select-Object -First 2
-            $results = @()
+            $results = [System.Collections.ArrayList]::new()
             foreach ($svc in $services) {
-                $results += Test-ServiceHealth -ServiceName $svc.Name -SystemName 'Integration Test'
+                $null = $results.Add((Test-ServiceHealth -ServiceName $svc.Name -SystemName 'Integration Test'))
             }
             $results.Count | Should -Be 2
             $results | ForEach-Object { $_.SystemName | Should -Be 'Integration Test' }

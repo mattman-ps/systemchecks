@@ -1,19 +1,19 @@
 # Convert file to CSV
 $lines = Get-Content "BulkLoad\PowerShell\Includes\ScheduleTaskFilters\Original_TaskResultCodes.txt"
-$records = @()
+$records = [System.Collections.ArrayList]::new()
 $record = @()
 
 for ($i = 0; $i -lt $lines.Count; $i++) {
-    $record += $lines[$i]
+    $record = [System.Collections.ArrayList]$record; $null = $record.Add($lines[$i])
     if (($i + 1) % 3 -eq 0) {
-        $records += $record -join ","
+        $null = $records.Add(($record -join ","))
         $record = @()
     }
 }
 
 # handle any remaining lines
 if ($record.Count -gt 0) {
-    $records += $record -join ","
+    $null = $records.Add(($record -join ","))
 }
 
 $ResultCodesHeader = "Code,HexValue,Description"
@@ -22,12 +22,12 @@ $records | Add-Content "BulkLoad\PowerShell\Includes\ScheduleTaskFilters\TaskRes
 
 # Add decimal value for the hex
 $codes = Import-Csv -Path "BulkLoad\PowerShell\Includes\ScheduleTaskFilters\TaskResultCodes.txt"
-$newcodes = @()
+$newcodes = [System.Collections.ArrayList]::new()
 $codes | ForEach-Object {
     $myobject = $_
     $decimalValue = [Convert]::ToInt32($myobject.HexValue, 16)
     $myobject | Add-Member -MemberType NoteProperty -Name "DecimalValue" -Value $decimalValue
-    $newcodes += $myobject
+    $null = $newcodes.Add($myobject)
 }
 
 # output the file
