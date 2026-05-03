@@ -482,6 +482,65 @@ Describe 'Test-TimeSync' {
     }
 }
 
+Describe 'Get-SystemHealth' {
+    Context 'When config includes TimeSync checks' {
+        BeforeAll {
+            $ConfigPath = Join-Path $TestDrive 'timesync-config.json'
+            $ConfigData = @{
+                systemName  = 'TestSystem'
+                description = 'Time sync config test'
+                Processes   = @()
+                Services    = @()
+                FilesExist  = @()
+                SharesExist = @()
+                URIs        = @()
+                ScheduledTasks = @()
+                FileCount   = @()
+                TimeSync    = @(
+                    @{
+                        System1Name = 'ServerA'
+                        System2Name = 'ServerB'
+                    }
+                )
+            }
+            $ConfigData | ConvertTo-Json -Depth 5 | Set-Content -Path $ConfigPath
+            New-Item -Path (Join-Path $TestDrive 'output_files') -ItemType Directory -Force | Out-Null
+            . (Join-Path $ProjectRoot 'src' 'public' 'Get-SystemHealth.ps1')
+        }
+
+        It 'Should call Test-TimeSync for each TimeSync config entry' {
+            Mock -CommandName Test-TimeSync -MockWith {
+                [PSCustomObject]@{
+                    System1Name     = $System1Name
+                    System1DateTime = [datetime]'2026-01-01T00:00:00'
+                    System2Name     = $System2Name
+                    System2DateTime = [datetime]'2026-01-01T00:00:00'
+                    Type            = 'TimeSync'
+                    Status          = 'Success'
+                    Difference      = [timespan]::Zero
+                    LastUpdate      = '2026-01-01 00:00:00'
+                    Comment         = @('', '')
+                }
+            }
+
+            Push-Location $TestDrive
+            try {
+                $configFile = Get-Item $ConfigPath
+                $result = Get-SystemHealth -ConfigFileName $configFile
+            }
+            finally {
+                Pop-Location
+            }
+
+            Assert-MockCalled -CommandName Test-TimeSync -Times 1 -Exactly -ParameterFilter {
+                $System1Name -eq 'ServerA' -and $System2Name -eq 'ServerB'
+            }
+            $result | Should -Not -BeNullOrEmpty
+            $result[0].Type | Should -Be 'TimeSync'
+        }
+    }
+}
+
 Describe 'Integration Tests' {
     Context 'Real system checks' {
         It 'Should check multiple file existence scenarios' {

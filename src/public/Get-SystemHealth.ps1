@@ -5,9 +5,9 @@
 
  .Description
  Reads one or more JSON configuration files and runs the appropriate health checks
- (processes, services, files, shares, URIs, scheduled tasks, file counts) for each
- system defined.  Results are collected into a flat list and written to an output
- JSON file under .\output_files\.
+ (processes, services, files, shares, URIs, scheduled tasks, time sync, file counts)
+ for each system defined.  Results are collected into a flat list and written to an
+ output JSON file under .\output_files\.
 
  .Parameter ConfigFileName
  One or more FileInfo or path objects pointing to the JSON configuration files to process.
@@ -85,6 +85,14 @@ function Get-SystemHealth {
                 SystemDescription = $SystemDescription
             }
             $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-ScheduledTask @schedtaskSplat))
+        }
+
+        $file.TimeSync | ForEach-Object {
+            $timesyncSplat = @{
+                System1Name = $_.System1Name
+                System2Name = $_.System2Name
+            }
+            $SystemHealthData = [System.Collections.ArrayList]$SystemHealthData; $null = $SystemHealthData.Add((Test-TimeSync @timesyncSplat))
         }
 
         $file.FileCount | ForEach-Object {
