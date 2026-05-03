@@ -24,6 +24,7 @@ jobs:
         run: |
           Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
           Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module -Name PlatyPS -Force -SkipPublisherCheck -Scope CurrentUser
 
       - name: Build Module
         shell: pwsh
@@ -55,6 +56,7 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module -Name PlatyPS -Force -SkipPublisherCheck -Scope CurrentUser
 
       - name: Build Module
         shell: pwsh
