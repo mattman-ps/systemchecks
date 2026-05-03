@@ -101,6 +101,22 @@
           }
         }
       }
+    },
+    "SharesExist": {
+      "type": "array",
+      "items": {
+        "required": [
+          "SharePath"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "SharePath": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
