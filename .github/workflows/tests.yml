@@ -26,6 +26,12 @@ jobs:
       - name: Build Module
         shell: pwsh
         run: |
+          if (Get-Module -ListAvailable -Name 'Microsoft.PowerShell.PlatyPS') {
+            Import-Module -Name 'Microsoft.PowerShell.PlatyPS' -Force
+          }
+          elseif (Get-Module -ListAvailable -Name 'PlatyPS') {
+            Import-Module -Name 'PlatyPS' -Force
+          }
           Invoke-MTBuild
 
       - name: Run Pester Tests
