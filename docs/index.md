@@ -51,7 +51,7 @@ SystemChecks provides the following functions for building health checks:
 
 ## Project Status
 
-This module is currently in early development (v0.1.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
+This module is currently in early development (v0.2.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
 
 ## Support
 

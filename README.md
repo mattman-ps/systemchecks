@@ -278,5 +278,5 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 
 ---
 
-**Note**: This module is currently in early development (v0.0.1). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
+**Note**: This module is currently in early development (v0.2.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
 

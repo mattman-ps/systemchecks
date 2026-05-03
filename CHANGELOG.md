@@ -10,6 +10,17 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for remote checks (pass a ComputerName to the individual Test-* functions)
 - Output formatting helper for console display
 
+## [0.2.0] - 2026-05-03
+
+### Added
+
+- `Get-SystemHealth`: added support for `TimeSync` config entries to run `Test-TimeSync` checks from JSON definitions
+- Pester coverage for `Get-SystemHealth` to verify `TimeSync` entries call `Test-TimeSync` with expected parameters
+
+### Changed
+
+- Module version bumped to `0.2.0` across project metadata, manifest, tests, and documentation
+
 ## [0.0.1]
 
 ### Added
