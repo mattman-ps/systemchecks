@@ -23,19 +23,11 @@ jobs:
         shell: pwsh
         run: |
           Install-Module -Name Pester -Force -SkipPublisherCheck -Scope CurrentUser
-          Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
-          Install-Module -Name PlatyPS -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module -Name ModuleTools -RequiredVersion 1.3.0 -Force -SkipPublisherCheck -Scope CurrentUser
 
       - name: Build Module
         shell: pwsh
-        run: |
-          if (Get-Module -ListAvailable -Name 'Microsoft.PowerShell.PlatyPS') {
-            Import-Module -Name 'Microsoft.PowerShell.PlatyPS' -Force
-          }
-          elseif (Get-Module -ListAvailable -Name 'PlatyPS') {
-            Import-Module -Name 'PlatyPS' -Force
-          }
-          Invoke-MTBuild
+        run: Invoke-MTBuild
 
       - name: Run Pester Tests
         shell: pwsh
@@ -61,19 +53,11 @@ jobs:
       - name: Install Dependencies
         shell: pwsh
         run: |
-          Install-Module -Name ModuleTools -Force -SkipPublisherCheck -Scope CurrentUser
-          Install-Module -Name PlatyPS -Force -SkipPublisherCheck -Scope CurrentUser
+          Install-Module -Name ModuleTools -RequiredVersion 1.3.0 -Force -SkipPublisherCheck -Scope CurrentUser
 
       - name: Build Module
         shell: pwsh
-        run: |
-          if (Get-Module -ListAvailable -Name 'Microsoft.PowerShell.PlatyPS') {
-            Import-Module -Name 'Microsoft.PowerShell.PlatyPS' -Force
-          }
-          elseif (Get-Module -ListAvailable -Name 'PlatyPS') {
-            Import-Module -Name 'PlatyPS' -Force
-          }
-          Invoke-MTBuild
+        run: Invoke-MTBuild
 
       - name: Publish to PowerShell Gallery
         shell: pwsh
