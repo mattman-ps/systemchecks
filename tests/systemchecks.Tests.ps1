@@ -29,7 +29,7 @@ Describe 'Module Import' {
 
     It 'Should have correct version' {
         $module = Get-Module systemchecks
-        $module.Version | Should -Be '0.2.0'
+        $module.Version | Should -Be '0.3.0'
     }
 
     It 'Should export expected functions' {

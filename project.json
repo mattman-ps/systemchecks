@@ -1,7 +1,7 @@
 {
   "ProjectName": "systemchecks",
   "Description": "PowerShell module for building comprehensive system health checks and infrastructure validations",
-  "Version": "0.2.0",
+  "Version": "0.3.0",
   "copyResourcesToModuleRoot": false,
   "Manifest": {
     "Author": "mattman-ps",

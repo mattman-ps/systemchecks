@@ -10,6 +10,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Add support for remote checks (pass a ComputerName to the individual Test-* functions)
 - Output formatting helper for console display
 
+## [0.3.0] - 2026-05-03
+
+### Added
+
+- TimeSync section added to JSON schema to support Test-TimeSync configuration
+
 ## [0.2.0] - 2026-05-03
 
 ### Added
