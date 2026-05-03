@@ -143,6 +143,27 @@
           }
         }
       }
+    },
+    "TimeSync": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": [
+          "System1Name",
+          "System2Name"
+        ],
+        "properties": {
+          "friendlyName": {
+            "type": "string"
+          },
+          "System1Name": {
+            "type": "string"
+          },
+          "System2Name": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }
