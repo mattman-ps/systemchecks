@@ -90,13 +90,13 @@
       "items": {
         "type": "object",
         "required": [
-          "taskpath"
+          "TaskPath"
         ],
         "properties": {
           "friendlyName": {
             "type": "string"
           },
-          "taskpath": {
+          "TaskPath": {
             "type": "string"
           }
         }
