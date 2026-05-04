@@ -1,5 +1,5 @@
 {
-	"$schema": "./schema/system_schema.json",
+	"$schema": "https://cdn.jsdelivr.net/gh/mattman-ps/systemchecks@v0.3.0/example/schema/system_schema.json",
 	"systemName": "MattMan's Special System",
 	"description": "This is a sample system",
 	"FilesExist": [
