@@ -11,6 +11,7 @@ A PowerShell module for running repeatable system health checks across Windows i
 
 - [Overview](#-overview)
 - [Features](#-features)
+- [Configuration Schema](#-configuration-schema)
 - [Requirements](#-requirements)
 - [Installation](#-installation)
 - [Quick Start](#-quick-start)
@@ -28,10 +29,47 @@ SystemChecks lets you describe what a healthy system looks like in a JSON file, 
 ## ✨ Features
 
 - **JSON-driven checks**: Define checks in a config file rather than writing a new script every time
+- **JSON Schema support**: IntelliSense and validation in VS Code and other editors via JSON Schema
 - **Consistent output shape**: Every check returns the same properties, so piping to `Where-Object`, `Export-Csv`, etc. always works the same way
 - **PowerShell Native**: Leverages PowerShell 7.4+ features for modern scripting
 - **Individual functions available**: You can also call any check function directly without a config file
 - **Pester-tested**: Functions have unit tests covering both happy-path and error scenarios
+
+## 📐 Configuration Schema
+
+SystemChecks provides a JSON Schema for configuration files, enabling IntelliSense, autocomplete, and validation in VS Code and other compatible editors.
+
+### Using the Schema
+
+Add the `$schema` property to your configuration file:
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/mattman-ps/systemchecks@v0.3.0/example/schema/system_schema.json",
+  "systemName": "My System",
+  "description": "Production server health checks",
+  "Services": [
+    {
+      "name": "w3svc",
+      "friendlyName": "IIS Web Server"
+    }
+  ]
+}
+```
+
+### Version Pinning
+
+**Recommended:** Pin to a specific version for stability:
+```
+https://cdn.jsdelivr.net/gh/mattman-ps/systemchecks@v0.3.0/example/schema/system_schema.json
+```
+
+**Alternative:** Use latest schema from main branch (may include breaking changes):
+```
+https://cdn.jsdelivr.net/gh/mattman-ps/systemchecks@main/example/schema/system_schema.json
+```
+
+The schema is hosted via jsDelivr CDN for reliable, fast access worldwide.
 
 ## 📋 Requirements
 
@@ -278,5 +316,5 @@ This project is licensed under the terms specified in the [LICENSE](LICENSE) fil
 
 ---
 
-**Note**: This module is currently in early development (v0.2.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
+**Note**: This module is currently in early development (v0.3.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
 
