@@ -35,6 +35,24 @@ Use a JSON configuration file to orchestrate multiple checks:
 Get-SystemHealth -ConfigFileName ".\config_files\system1.json"
 ```
 
+### Using JSON Schema for IntelliSense
+
+Add the `$schema` property to your configuration files for autocomplete and validation in VS Code:
+
+```json
+{
+  "$schema": "https://cdn.jsdelivr.net/gh/mattman-ps/systemchecks@v0.3.0/example/schema/system_schema.json",
+  "systemName": "My System",
+  "Services": [
+    {
+      "name": "w3svc"
+    }
+  ]
+}
+```
+
+Learn more about [configuration files](../usage/configuration.md).
+
 ## Available Functions
 
 SystemChecks provides these core functions:

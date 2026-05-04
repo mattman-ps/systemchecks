@@ -6,6 +6,10 @@ This section provides an overview of how to use the SystemChecks module.
 
 SystemChecks is built around the following concepts:
 
+### Configuration Files
+
+JSON-based configuration files define comprehensive health check suites. SystemChecks provides a JSON Schema for IntelliSense and validation support in modern editors. See [Configuration Files](configuration.md) for details.
+
 ### Checks
 
 Individual validation units that test specific conditions or configurations.

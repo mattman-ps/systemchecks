@@ -27,6 +27,7 @@ nav:
     - Requirements: getting-started/requirements.md
   - Usage:
     - Overview: usage/overview.md
+    - Configuration Files: usage/configuration.md
     - Examples: usage/examples.md
   - Development:
     - Contributing: development/contributing.md

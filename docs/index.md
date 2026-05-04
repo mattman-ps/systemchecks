@@ -13,6 +13,8 @@ SystemChecks is designed to help system administrators, DevOps engineers, and IT
 
 ## Features
 
+- **JSON-driven checks**: Define checks in configuration files rather than writing scripts every time
+- **JSON Schema support**: IntelliSense and validation in VS Code via hosted JSON Schema
 - **Modular Design**: Build reusable check components that can be combined and extended
 - **Flexible Framework**: Support for various types of system validations
 - **PowerShell Native**: Leverages PowerShell 7.4+ features for modern scripting
@@ -44,6 +46,7 @@ SystemChecks provides the following functions for building health checks:
 
 - [Installation](getting-started/installation.md)
 - [Quick Start](getting-started/quickstart.md)
+- [Configuration Files](usage/configuration.md)
 - [Usage Examples](usage/examples.md)
 - [API Reference](reference/functions.md)
 - [Contributing](development/contributing.md)
@@ -51,7 +54,7 @@ SystemChecks provides the following functions for building health checks:
 
 ## Project Status
 
-This module is currently in early development (v0.2.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
+This module is currently in early development (v0.3.0). APIs and features are subject to change. Please check the [CHANGELOG](CHANGELOG.md) for the latest updates.
 
 ## Support
 
